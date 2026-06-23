@@ -1,0 +1,108 @@
+---
+const columns = [
+	{ label: 'Entry', sub: 'Basic finishes, standard scope', accent: false },
+	{ label: 'Mid-Range', sub: 'Most popular — upgraded finishes', accent: true },
+	{ label: 'Premium', sub: 'Luxury materials, full custom', accent: false },
+];
+
+const rows = [
+	{ project: 'Bathroom Remodel',     entry: '$16,000', mid: '$35,000', premium: '$65,000+',  icon: `<path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 12H4"/>` },
+	{ project: 'Kitchen Remodel',      entry: '$28,000', mid: '$55,000', premium: '$100,000+', icon: `<path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3"/>` },
+	{ project: 'Home Addition',        entry: '$45,000', mid: '$110,000', premium: '$200,000+', icon: `<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>` },
+	{ project: 'Whole Home Remodel',   entry: '$75,000', mid: '$180,000', premium: '$350,000+', icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>` },
+];
+---
+
+<section class="pricing" aria-labelledby="pricing-headline">
+	<div class="container-site pricing__inner">
+
+		<!-- Header -->
+		<div class="pricing__header">
+			<p class="pricing__eyebrow">Real Numbers</p>
+			<h2 id="pricing-headline" class="pricing__headline">
+				Real Price Ranges. No Surprises.
+			</h2>
+			<p class="pricing__sub">
+				We're one of the few contractors in Raleigh who publishes honest price ranges publicly, because we believe you deserve to be informed before the first conversation.
+			</p>
+		</div>
+
+		<!-- Desktop table -->
+		<div class="pricing__card pricing__card--desktop">
+
+			<!-- Column headers -->
+			<div class="pricing__col-headers">
+				<div class="pricing__col-project-label">Project</div>
+				{columns.map(col => (
+					<div class={`pricing__col-header ${col.accent ? 'pricing__col-header--accent' : ''}`}>
+						<span class="pricing__col-label">{col.label}</span>
+						<span class="pricing__col-sub">{col.sub}</span>
+						{col.accent && <span class="pricing__popular-badge">Most Common</span>}
+					</div>
+				))}
+			</div>
+
+			<!-- Rows -->
+			{rows.map((row, i) => (
+				<div class={`pricing__row ${i % 2 === 0 ? 'pricing__row--alt' : ''}`}>
+					<div class="pricing__row-project">
+						<span class="pricing__row-icon">
+							<svg aria-hidden="true" viewBox="0 0 24 24" set:html={row.icon} />
+						</span>
+						<span>{row.project}</span>
+					</div>
+					<div class="pricing__cell">{row.entry}</div>
+					<div class="pricing__cell pricing__cell--accent">{row.mid}</div>
+					<div class="pricing__cell">{row.premium}</div>
+				</div>
+			))}
+
+			<!-- Footnote -->
+			<div class="pricing__footnote">
+				<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+				<p>These ranges reflect completed projects in Wake County. Your final investment depends on scope, finish level, and structural requirements. <a href="#estimate">Use the estimator above</a> to get a range specific to your project.</p>
+			</div>
+
+		</div>
+
+		<!-- Mobile cards -->
+		<div class="pricing__mobile-cards">
+			{rows.map(row => (
+				<div class="pricing__mobile-card">
+					<div class="pricing__mobile-card-title">
+						<svg aria-hidden="true" viewBox="0 0 24 24" set:html={row.icon} />
+						{row.project}
+					</div>
+					<div class="pricing__mobile-tiers">
+						<div class="pricing__mobile-tier">
+							<span class="pricing__mobile-tier-label">Entry</span>
+							<span class="pricing__mobile-tier-value">{row.entry}</span>
+						</div>
+						<div class="pricing__mobile-tier pricing__mobile-tier--accent">
+							<span class="pricing__mobile-tier-label">
+								Mid-Range
+								<span class="pricing__popular-badge" style="font-size:0.55rem; padding: 1px 6px;">Popular</span>
+							</span>
+							<span class="pricing__mobile-tier-value pricing__mobile-tier-value--accent">{row.mid}</span>
+						</div>
+						<div class="pricing__mobile-tier">
+							<span class="pricing__mobile-tier-label">Premium</span>
+							<span class="pricing__mobile-tier-value">{row.premium}</span>
+						</div>
+					</div>
+				</div>
+			))}
+			<p class="pricing__mobile-note">Ranges based on completed Wake County projects. <a href="#estimate">Get your specific estimate →</a></p>
+		</div>
+
+		<!-- Bottom CTA -->
+		<div class="pricing__cta-row">
+			<a href="#estimate" class="btn btn-primary">
+				Get My Project Estimate
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+			<p class="pricing__cta-note">Free, no email required to see your range</p>
+		</div>
+
+	</div>
+</section>

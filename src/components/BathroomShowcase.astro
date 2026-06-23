@@ -1,0 +1,60 @@
+---
+const features = [
+	'Custom tile and stone work',
+	'Walk-in showers with niche shelving',
+	'Double vanities with soft-close cabinetry',
+	'Accessibility upgrades: grab bars, curbless entries, wider doorways',
+];
+---
+
+<section class="showcase showcase--bathroom" aria-labelledby="bathroom-headline">
+	<div class="container-site showcase__inner showcase__inner--reverse">
+
+		<!-- Left: content -->
+		<div class="showcase__content">
+			<p class="showcase__eyebrow">Specialty Focus</p>
+			<h2 id="bathroom-headline" class="showcase__headline">
+				Bathrooms Built to Last 20 Years
+			</h2>
+			<p class="showcase__sub">
+				Walk-in showers with frameless glass. Heated floors. Freestanding tubs. Tile work that makes people stop mid-sentence. We build bathrooms that feel like a hotel, in your own home.
+			</p>
+
+			<ul class="showcase__features">
+				{features.map(f => (
+					<li class="showcase__feature">
+						<span class="showcase__feature-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+						</span>
+						{f}
+					</li>
+				))}
+			</ul>
+
+			<a href="#estimate" class="btn btn-primary showcase__cta">
+				Start My Bathroom Estimate
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+		</div>
+
+		<!-- Right: image -->
+		<div class="showcase__image-col">
+			<div class="showcase__image-wrap">
+				<img
+					src="/puscas-adryan-xxXi3nucPQM-unsplash.webp"
+					alt="Custom bathroom remodel by Oak and Stone — Raleigh, NC"
+					class="showcase__image"
+					width="700"
+					height="560"
+					loading="lazy"
+					decoding="async"
+				/>
+				<div class="showcase__image-tag">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M18 12H4"/></svg>
+					Bathroom Remodeling
+				</div>
+			</div>
+		</div>
+
+	</div>
+</section>

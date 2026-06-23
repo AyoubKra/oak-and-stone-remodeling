@@ -1,0 +1,94 @@
+---
+const rows = [
+	{
+		problem: 'Vague estimates that balloon mid-project',
+		solution: 'Fixed-price proposals before any work begins',
+	},
+	{
+		problem: 'No timeline, no accountability',
+		solution: 'Detailed week-by-week project schedule provided upfront',
+	},
+	{
+		problem: 'Hard to reach after the deposit',
+		solution: 'Dedicated project manager you can text directly',
+	},
+	{
+		problem: 'Hidden fees for permits and labor',
+		solution: 'All-in pricing: labor, materials, design, and permits included',
+	},
+];
+
+const badges = [
+	{
+		icon: `<path d="M12 3 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>`,
+		label: 'Licensed & Insured',
+	},
+	{
+		icon: `<path d="M12 2v20M2 12h20"/>`,
+		label: '200+ Projects Completed',
+	},
+	{
+		icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
+		label: 'Fixed-Price Proposals',
+	},
+	{
+		icon: `<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>`,
+		label: 'No Surprise Charges',
+	},
+];
+---
+
+<section class="problem" aria-labelledby="problem-headline">
+	<div class="container-site problem__inner">
+
+		<!-- Centered header -->
+		<div class="problem__header">
+			<p class="problem__eyebrow">The Honest Truth</p>
+			<h2 id="problem-headline" class="problem__headline">
+				Most Remodels Turn Into a Nightmare.<br />
+				Here's Why — And How We Do It Differently.
+			</h2>
+			<p class="problem__sub">
+				Most contractors make promises. We make commitments — written, priced, and guaranteed before a single tool is picked up.
+			</p>
+		</div>
+
+		<!-- Comparison table centered -->
+		<div class="problem__table-wrap">
+			<div class="problem__table-head">
+				<span class="problem__col-label problem__col-label--bad">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+					The Industry Problem
+				</span>
+				<span class="problem__col-label problem__col-label--good">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+					The Oak &amp; Stone Solution
+				</span>
+			</div>
+
+			{rows.map(row => (
+				<div class="problem__row">
+					<div class="problem__cell problem__cell--bad">
+						<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+						<span>{row.problem}</span>
+					</div>
+					<div class="problem__cell problem__cell--good">
+						<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+						<span>{row.solution}</span>
+					</div>
+				</div>
+			))}
+
+			<!-- Badge disclaimer bar -->
+			<div class="problem__badges">
+				{badges.map(b => (
+					<div class="problem__badge">
+						<svg aria-hidden="true" viewBox="0 0 24 24" set:html={b.icon} />
+						<span>{b.label}</span>
+					</div>
+				))}
+			</div>
+		</div>
+
+	</div>
+</section>

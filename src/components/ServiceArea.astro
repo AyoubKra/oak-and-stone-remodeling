@@ -1,0 +1,73 @@
+---
+const areas = [
+	{ city: 'Raleigh',        count: '120+', x: '52%', y: '48%', primary: true },
+	{ city: 'Cary',           count: '48',   x: '38%', y: '60%' },
+	{ city: 'Apex',           count: '31',   x: '28%', y: '65%' },
+	{ city: 'Wake Forest',    count: '22',   x: '58%', y: '22%' },
+	{ city: 'Garner',         count: '19',   x: '55%', y: '68%' },
+	{ city: 'Holly Springs',  count: '17',   x: '33%', y: '78%' },
+];
+---
+
+<section class="service-area" aria-labelledby="area-headline">
+	<div class="container-site service-area__inner">
+
+		<!-- Left: text -->
+		<div class="service-area__content">
+			<p class="service-area__eyebrow">Where We Work</p>
+			<h2 id="area-headline" class="service-area__headline">
+				Serving Homeowners Across the Triangle
+			</h2>
+			<p class="service-area__sub">
+				From North Raleigh to Holly Springs, we've completed projects in neighborhoods across Wake County.
+			</p>
+
+			<ul class="service-area__list">
+				{areas.map(a => (
+					<li class={`service-area__item ${a.primary ? 'service-area__item--primary' : ''}`}>
+						<span class="service-area__dot" aria-hidden="true"></span>
+						<span class="service-area__city">{a.city}</span>
+						<span class="service-area__count">{a.count} projects</span>
+					</li>
+				))}
+			</ul>
+
+			<a href="#estimate" class="service-area__cta">
+				Don't See Your Area? Contact Us
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+		</div>
+
+		<!-- Right: styled map visual -->
+		<div class="service-area__map" aria-hidden="true">
+			<!-- Triangle area shape (stylised county outline) -->
+			<div class="service-area__map-bg">
+				<svg class="service-area__map-outline" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<!-- Wake County rough outline -->
+					<path d="M80 60 L320 50 L340 260 L60 270 Z" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" fill="rgba(255,255,255,0.03)" stroke-dasharray="6 4"/>
+					<!-- Roads / grid lines -->
+					<line x1="0" y1="155" x2="400" y2="155" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+					<line x1="200" y1="0" x2="200" y2="320" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+					<line x1="0" y1="77" x2="400" y2="77" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
+					<line x1="0" y1="233" x2="400" y2="233" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
+				</svg>
+
+				<!-- City dots positioned on the map -->
+				{areas.map(a => (
+					<div class={`service-area__pin ${a.primary ? 'service-area__pin--primary' : ''}`} style={`left:${a.x}; top:${a.y};`}>
+						<div class="service-area__pin-dot"></div>
+						<div class="service-area__pin-ring" aria-hidden="true"></div>
+						<div class="service-area__pin-label">
+							<strong>{a.city}</strong>
+							<span>{a.count} projects</span>
+						</div>
+					</div>
+				))}
+
+				<!-- Coverage glow -->
+				<div class="service-area__glow" aria-hidden="true"></div>
+			</div>
+		</div>
+
+	</div>
+</section>

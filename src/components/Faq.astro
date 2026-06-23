@@ -1,0 +1,140 @@
+---
+const faqs = [
+	{
+		q: 'How accurate is the online estimator?',
+		a: 'Our estimator is based on over 200 completed projects in the Raleigh area and gives you a realistic range, not a lowball number to get you in the door. Most final quotes land within 10–15% of the estimator range. The detailed consultation tightens that number to the exact figure.',
+	},
+	{
+		q: 'How long does a remodel take?',
+		a: 'Bathroom remodels typically run 4–8 weeks. Kitchen remodels take 7–12 weeks. Home additions run 12–20 weeks depending on size. We give you a week-by-week schedule before any contract is signed.',
+	},
+	{
+		q: 'Do you offer financing?',
+		a: 'Yes. We partner with two financing providers who offer 12-month same-as-cash and longer-term payment plans. Many homeowners pay as little as $299/month on qualifying projects.',
+	},
+	{
+		q: 'Can I stay in my home during the remodel?',
+		a: 'For kitchen and bathroom projects, usually yes, with some adjustments during peak demolition. For whole-home remodels or additions that affect major utilities, we\'ll give you an honest recommendation during the consultation.',
+	},
+	{
+		q: 'Do I need permits for my remodel?',
+		a: 'For any structural, plumbing, or electrical work, yes. We handle all permit applications and inspections in Wake County as part of our fixed-price proposal. You don\'t pay extra, and you don\'t have to manage it yourself.',
+	},
+	{
+		q: 'What areas do you serve?',
+		a: 'Our primary service area covers Raleigh, Cary, Apex, Wake Forest, Garner, Holly Springs, Morrisville, and Fuquay-Varina. Contact us for projects outside Wake County.',
+	},
+	{
+		q: 'What if my project goes over budget?',
+		a: 'It doesn\'t, that\'s the point of a fixed-price proposal. Once you sign, that number is your number. If we uncover something unexpected inside a wall, we discuss it with you in writing before proceeding. No surprise invoices.',
+	},
+];
+
+const badges = [
+	{
+		label: 'Licensed & Insured',
+		svg: `<path d="M12 3 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>`,
+	},
+	{
+		label: '2-Year Warranty',
+		svg: `<circle cx="12" cy="8" r="5.5"/><path d="M8.5 13.5 7 21l5-2.5L17 21l-1.5-7.5"/>`,
+	},
+	{
+		label: 'Financing Available',
+		svg: `<circle cx="12" cy="12" r="9"/><path d="M12 6v12"/><path d="M15.5 8.5H10a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8.5"/>`,
+	},
+	{
+		label: '200+ Projects',
+		svg: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+	},
+];
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-headline">
+	<div class="container-site faq__inner">
+
+		<div class="faq__header">
+			<p class="faq__eyebrow">Questions We Hear Every Week</p>
+			<h2 id="faq-headline" class="faq__headline">FAQ</h2>
+
+			<div class="faq__card">
+				<div class="faq__card-icon">
+					<svg aria-hidden="true" viewBox="0 0 24 24">
+						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+					</svg>
+				</div>
+				<h3 class="faq__card-title">Still have questions?</h3>
+				<p class="faq__card-text">We're here to help. Talk with our team and get expert answers.</p>
+				<a href="#estimate" class="faq__card-btn">
+					Get My Project Estimate
+					<svg aria-hidden="true" viewBox="0 0 24 24">
+						<path d="M5 12h14M13 6l6 6-6 6"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<dl class="faq__list">
+			{faqs.map((item, i) => (
+				<div class="faq__item" id={`faq-item-${i}`}>
+					<dt>
+						<button
+							class="faq__question"
+							aria-expanded="false"
+							aria-controls={`faq-answer-${i}`}
+						>
+							<span>{item.q}</span>
+							<svg class="faq__icon" aria-hidden="true" viewBox="0 0 24 24">
+								<path d="M6 9l6 6 6-6"/>
+							</svg>
+						</button>
+					</dt>
+					<dd class="faq__answer" id={`faq-answer-${i}`} aria-hidden="true">
+						<p>{item.a}</p>
+					</dd>
+				</div>
+			))}
+		</dl>
+
+	</div>
+
+	<!-- Badges — full width, one row at the bottom -->
+	<div class="faq__badges-bar">
+		<div class="container-site faq__badges">
+			{badges.map(b => (
+				<div class="faq__badge">
+					<span class="faq__badge-icon">
+						<svg aria-hidden="true" viewBox="0 0 24 24" set:html={b.svg}/>
+					</span>
+					<span class="faq__badge-label">{b.label}</span>
+				</div>
+			))}
+		</div>
+	</div>
+
+</section>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('.faq__question').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const expanded = btn.getAttribute('aria-expanded') === 'true';
+			const answerId = btn.getAttribute('aria-controls')!;
+			const answer   = document.getElementById(answerId)!;
+
+			document.querySelectorAll<HTMLButtonElement>('.faq__question').forEach(other => {
+				if (other === btn) return;
+				other.setAttribute('aria-expanded', 'false');
+				const otherId = other.getAttribute('aria-controls')!;
+				const otherAnswer = document.getElementById(otherId)!;
+				otherAnswer.setAttribute('aria-hidden', 'true');
+				otherAnswer.style.maxHeight = '0';
+				other.closest('.faq__item')!.classList.remove('is-open');
+			});
+
+			btn.setAttribute('aria-expanded', String(!expanded));
+			answer.setAttribute('aria-hidden', String(expanded));
+			answer.style.maxHeight = expanded ? '0' : answer.scrollHeight + 'px';
+			btn.closest('.faq__item')!.classList.toggle('is-open', !expanded);
+		});
+	});
+</script>

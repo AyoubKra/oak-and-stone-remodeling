@@ -1,0 +1,60 @@
+---
+const features = [
+	'Custom cabinetry with soft-close hardware',
+	'Quartz and granite countertop options',
+	'Layout redesigns that open up dead space',
+	'Smart storage: pull-out pantries, drawer organizers, corner solutions',
+];
+---
+
+<section class="showcase showcase--kitchen" aria-labelledby="kitchen-headline">
+	<div class="container-site showcase__inner showcase__inner--reverse">
+
+		<!-- Left: image -->
+		<div class="showcase__image-col">
+			<div class="showcase__image-wrap">
+				<img
+					src="/New kitech.png"
+					alt="Custom kitchen remodel by Oak and Stone — Raleigh, NC"
+					class="showcase__image"
+					width="700"
+					height="560"
+					loading="lazy"
+					decoding="async"
+				/>
+				<div class="showcase__image-tag">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3"/></svg>
+					Kitchen Remodeling
+				</div>
+			</div>
+		</div>
+
+		<!-- Right: content -->
+		<div class="showcase__content">
+			<p class="showcase__eyebrow">Specialty Focus</p>
+			<h2 id="kitchen-headline" class="showcase__headline">
+				Kitchens That Actually Work Better
+			</h2>
+			<p class="showcase__sub">
+				Beautiful is table stakes. We design kitchens around how you cook, how you entertain, and how your family actually uses the space.
+			</p>
+
+			<ul class="showcase__features">
+				{features.map(f => (
+					<li class="showcase__feature">
+						<span class="showcase__feature-icon" aria-hidden="true">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+						</span>
+						{f}
+					</li>
+				))}
+			</ul>
+
+			<a href="#estimate" class="btn btn-primary showcase__cta">
+				Start My Kitchen Estimate
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+		</div>
+
+	</div>
+</section>

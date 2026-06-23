@@ -1,11 +1,38 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Faq from '../components/Faq.astro';
+import Includes from '../components/Includes.astro';
+import Services from '../components/Services.astro';
+import Pricing from '../components/Pricing.astro';
+import Gallery from '../components/Gallery.astro';
+import LeadMagnet from '../components/LeadMagnet.astro';
+import Process from '../components/Process.astro';
+import ServiceArea from '../components/ServiceArea.astro';
+import KitchenShowcase from '../components/KitchenShowcase.astro';
+import BathroomShowcase from '../components/BathroomShowcase.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+	<Header />
+	<Hero />
+	<Problem />
+	<Includes />
+	<Services />
+	<Pricing />
+	<Gallery />
+	<LeadMagnet />
+	<Process />
+	<ServiceArea />
+	<KitchenShowcase />
+	<BathroomShowcase />
+	<Testimonials />
+	<Faq />
+	<CtaBanner />
+	<Footer />
+</BaseLayout>

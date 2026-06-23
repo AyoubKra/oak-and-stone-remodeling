@@ -1,0 +1,99 @@
+---
+const projects = [
+	{ title: 'Kitchen Remodel', location: 'Wake Forest, NC', investment: '$61,400', timeline: '9 Weeks', before: '/separate_remodel_images/ba-addition-wake-forest-before.webp', after: '/separate_remodel_images/ba-addition-wake-forest-after.webp' },
+	{ title: 'Primary Bathroom', location: 'Apex, NC', investment: '$38,800', timeline: '6 Weeks', before: '/separate_remodel_images/ba-bathroom-apex-before.webp', after: '/separate_remodel_images/ba-bathroom-apex-after.webp' },
+	{ title: 'Whole Home Remodel', location: 'Holly Springs, NC', investment: '$214,000', timeline: '18 Weeks', before: '/separate_remodel_images/ba-addition-holly-springs-before.webp', after: '/separate_remodel_images/ba-addition-holly-springs-after.webp' },
+];
+---
+
+<section class="gallery" aria-labelledby="gallery-headline">
+	<div class="container-site gallery__inner">
+
+		<div class="gallery__header">
+			<p class="gallery__eyebrow">Proof, Not Promises</p>
+			<h2 id="gallery-headline" class="gallery__headline">Real Projects. Real Raleigh Homes.</h2>
+			<p class="gallery__sub">Every before-and-after below is a completed project in the Triangle area. Drag the slider to see the transformation.</p>
+		</div>
+
+		<div class="gallery__grid">
+			{projects.map((p) => (
+				<div class="gallery__item" data-gallery-item>
+					<!-- Before image (grayscale) -->
+					<div class="gallery__before">
+						<img src={p.before} alt={`Before — ${p.title}`} loading="lazy" />
+						<span class="gallery__label gallery__label--before">Before</span>
+					</div>
+					<!-- After image (color) — clipped by JS -->
+					<div class="gallery__after">
+						<img src={p.after} alt={`After — ${p.title}`} loading="lazy" />
+						<span class="gallery__label gallery__label--after">After</span>
+					</div>
+					<!-- Drag handle -->
+					<div class="gallery__handle" aria-hidden="true">
+						<div class="gallery__handle-line"></div>
+						<div class="gallery__handle-btn">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/></svg>
+						</div>
+					</div>
+					<!-- Range input for drag -->
+					<input
+						type="range"
+						class="gallery__slider"
+						min="0"
+						max="100"
+						value="50"
+						aria-label={`Compare before and after: ${p.title}`}
+					/>
+					<!-- Project info -->
+					<div class="gallery__info">
+						<div>
+							<p class="gallery__info-title">{p.title}</p>
+							<p class="gallery__info-loc">{p.location}</p>
+						</div>
+						<div class="gallery__info-meta">
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+								{p.investment}
+							</span>
+							<span>
+								<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+								{p.timeline}
+							</span>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<div class="gallery__cta-row">
+			<a href="#estimate" class="btn btn-primary">
+				See More Completed Projects
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+		</div>
+
+	</div>
+</section>
+
+<script>
+(function() {
+	document.querySelectorAll('[data-gallery-item]').forEach(function(item) {
+		var slider  = item.querySelector('.gallery__slider') as HTMLInputElement | null;
+		var after   = item.querySelector('.gallery__after') as HTMLElement | null;
+		var handle  = item.querySelector('.gallery__handle') as HTMLElement | null;
+
+		if (!slider || !after || !handle) return;
+
+		function update(val: number) {
+			after!.style.clipPath = 'inset(0 ' + (100 - val) + '% 0 0)';
+			handle!.style.left    = val + '%';
+		}
+
+		update(50);
+
+		slider.addEventListener('input', function(e) {
+			update(Number((e.target as HTMLInputElement).value));
+		});
+	});
+})();
+</script>

@@ -1,0 +1,101 @@
+---
+---
+
+<section class="lead" aria-labelledby="lead-headline">
+	<div class="container-site lead__inner">
+
+		<!-- Left: text + form -->
+		<div class="lead__content">
+			<p class="lead__eyebrow">Free Download</p>
+			<h2 id="lead-headline" class="lead__headline">
+				The 2026 Raleigh Remodeling Cost Guide
+			</h2>
+			<p class="lead__sub">
+				14 pages covering real project costs, contractor red flags, permit requirements in Wake County, and the questions every Raleigh homeowner should ask before signing anything.
+			</p>
+			<p class="lead__proof">
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+				<strong>Used by 800+ Raleigh homeowners this year. No cost. No sales pitch.</strong>
+			</p>
+			<form class="lead__form" id="lead-form">
+				<div class="lead__field">
+					<div class="lead__input-row">
+						<input class="lead__input" type="email" id="lead-email" placeholder="Your email address" required aria-label="Email address" />
+						<button type="submit" class="lead__btn">
+							Download Free Guide
+							<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+						</button>
+					</div>
+				</div>
+				<p class="lead__privacy">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+					No spam. One email, your guide. Unsubscribe any time.
+				</p>
+			</form>
+			<p class="lead__thanks" id="lead-thanks" style="display:none">
+				✓ Check your inbox — the guide is on its way!
+			</p>
+		</div>
+
+		<!-- Right: guide mockup -->
+		<div class="lead__mockup" aria-hidden="true">
+			<div class="lead__book">
+				<div class="lead__book-spine"></div>
+				<div class="lead__book-cover">
+					<!-- Certified stamp top-right -->
+					<div class="lead__book-stamp" aria-hidden="true">
+						<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+							<!-- Outer ring -->
+							<circle cx="40" cy="40" r="37" fill="none" stroke="#F59E0B" stroke-width="2.5"/>
+							<circle cx="40" cy="40" r="31" fill="none" stroke="#F59E0B" stroke-width="1"/>
+							<!-- Star burst / seal rays -->
+							{Array.from({length: 16}).map((_, i) => {
+								const angle = (i * 360 / 16) * Math.PI / 180;
+								const x1 = 40 + 31 * Math.cos(angle);
+								const y1 = 40 + 31 * Math.sin(angle);
+								const x2 = 40 + 36 * Math.cos(angle);
+								const y2 = 40 + 36 * Math.sin(angle);
+								return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#F59E0B" stroke-width="1.5"/>;
+							})}
+							<!-- Check icon center -->
+							<polyline points="27,40 36,49 53,32" fill="none" stroke="#F59E0B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+							<!-- Text arc - top -->
+							<path id="arc-top" d="M 12,40 A 28,28 0 0,1 68,40" fill="none"/>
+							<text font-size="7.5" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" fill="#F59E0B" letter-spacing="1.5">
+								<textPath href="#arc-top" startOffset="50%" text-anchor="middle">APPROVED</textPath>
+							</text>
+							<!-- Text arc - bottom -->
+							<path id="arc-bot" d="M 12,40 A 28,28 0 0,0 68,40" fill="none"/>
+							<text font-size="6.5" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" fill="#F59E0B" letter-spacing="1">
+								<textPath href="#arc-bot" startOffset="50%" text-anchor="middle">OAK &amp; STONE</textPath>
+							</text>
+						</svg>
+					</div>
+
+					<div class="lead__book-badge">2026 Edition</div>
+					<p class="lead__book-eyebrow">Oak &amp; Stone Remodeling</p>
+					<h3 class="lead__book-title">Raleigh Remodeling Cost Guide</h3>
+					<ul class="lead__book-list">
+						<li>Real project cost ranges</li>
+						<li>Contractor red flags</li>
+						<li>Wake County permit guide</li>
+						<li>Questions to ask before signing</li>
+					</ul>
+					<div class="lead__book-pages" aria-hidden="true">
+						<span></span><span></span><span></span>
+					</div>
+				</div>
+			</div>
+			<div class="lead__mockup-glow" aria-hidden="true"></div>
+		</div>
+
+	</div>
+</section>
+
+<script>
+document.getElementById('lead-form')!.addEventListener('submit', function(e) {
+	e.preventDefault();
+	(this as HTMLFormElement).style.display = 'none';
+	document.getElementById('lead-thanks')!.style.display = 'block';
+});
+</script>

@@ -1,0 +1,132 @@
+---
+const reviews = [
+	{
+		quote: "We got three quotes before calling Oak & Stone. Every other contractor gave us a vague number with a long list of what wasn't included. Oak & Stone gave us a single price and stuck to it. Our kitchen came in exactly on budget and finished two days ahead of schedule.",
+		name: "Marcus & Jennifer T.",
+		role: "Kitchen Remodel — North Raleigh",
+		initials: "MJ",
+	},
+	{
+		quote: "I was nervous because I'd seen my neighbor's bathroom remodel turn into a four-month disaster with another contractor. From day one, Oak & Stone had a schedule on paper and held to it. The tile work alone is worth every dollar.",
+		name: "Patricia W.",
+		role: "Master Bathroom — Cary, NC",
+		initials: "PW",
+	},
+	{
+		quote: "We used the cost estimator on the website before even calling, and the actual quote came back right in the middle of the range it gave us. That immediately told me these people know what they're doing and don't play games.",
+		name: "David R.",
+		role: "Whole Home Remodel — Apex, NC",
+		initials: "DR",
+	},
+	{
+		quote: "Our home addition project involved plumbing, electrical, and a load-bearing wall. Oak & Stone brought in the right subcontractors, managed all of it, and we never had a single confused day on the project.",
+		name: "The Okafor Family",
+		role: "450 sq ft Addition — Wake Forest",
+		initials: "OF",
+	},
+	{
+		quote: "The photo updates every day were something I didn't know I needed. I traveled for work during the build and never once felt out of the loop. The project manager answered my texts at 9pm without complaint.",
+		name: "Sandra M.",
+		role: "Kitchen + Master Bath — Garner, NC",
+		initials: "SM",
+	},
+	{
+		quote: "Honest, professional, and the cleanest job site I've ever seen. My neighbor was so impressed she hired them the month after we finished. I've already referred three families from our street.",
+		name: "Robert & Diane H.",
+		role: "Primary Bathroom — Holly Springs",
+		initials: "RH",
+	},
+];
+---
+
+<section class="reviews" id="reviews" aria-labelledby="reviews-headline">
+
+	<div class="container-site reviews__header">
+		<div class="reviews__heading">
+			<p class="reviews__eyebrow">Real Customers</p>
+			<h2 id="reviews-headline" class="reviews__headline">What Raleigh Homeowners Are Saying</h2>
+			<p class="reviews__sub">Real customers. Real projects. Real results.</p>
+		</div>
+		<div class="reviews__arrows">
+			<button class="reviews__arrow" id="reviews-prev" aria-label="Previous reviews">
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+			</button>
+			<button class="reviews__arrow" id="reviews-next" aria-label="Next reviews">
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</button>
+		</div>
+	</div>
+
+	<div class="container-site">
+	<div class="reviews__track-wrap" id="reviews-track-wrap">
+		<ul class="reviews__track" id="reviews-track">
+			{reviews.map(r => (
+				<li class="review-card">
+					<div class="review-card__stars" aria-label="5 out of 5 stars">
+						{Array(5).fill(null).map(() => (
+							<svg aria-hidden="true" viewBox="0 0 24 24">
+								<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+							</svg>
+						))}
+					</div>
+
+					<blockquote class="review-card__quote">
+						<p>"{r.quote}"</p>
+					</blockquote>
+
+					<button class="review-card__read-more" aria-expanded="false">
+						Read more
+						<svg aria-hidden="true" viewBox="0 0 24 24">
+							<path d="M5 12h14M13 6l6 6-6 6"/>
+						</svg>
+					</button>
+
+					<footer class="review-card__author">
+						<div class="review-card__avatar" aria-hidden="true">{r.initials}</div>
+						<div class="review-card__info">
+							<p class="review-card__name">{r.name}</p>
+							<p class="review-card__role">{r.role}</p>
+						</div>
+					</footer>
+				</li>
+			))}
+		</ul>
+	</div>
+	</div>
+
+</section>
+
+<script>
+	// Read more toggle
+	document.querySelectorAll<HTMLButtonElement>('.review-card__read-more').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const card = btn.closest('.review-card')!;
+			const expanded = btn.getAttribute('aria-expanded') === 'true';
+			card.classList.toggle('is-expanded', !expanded);
+			btn.setAttribute('aria-expanded', String(!expanded));
+			btn.childNodes[0].textContent = expanded ? 'Read more' : 'Read less';
+		});
+	});
+
+	// Arrow scroll
+	const wrap = document.getElementById('reviews-track-wrap')!;
+	const prev = document.getElementById('reviews-prev') as HTMLButtonElement;
+	const next = document.getElementById('reviews-next') as HTMLButtonElement;
+
+	const scrollByCard = (dir: 1 | -1) => {
+		const card = wrap.querySelector<HTMLElement>('.review-card')!;
+		const cardWidth = card.offsetWidth + 20; // card + gap
+		const maxScroll = wrap.scrollWidth - wrap.clientWidth;
+
+		if (dir === 1 && wrap.scrollLeft >= maxScroll - 4) {
+			wrap.scrollTo({ left: 0, behavior: 'smooth' });
+		} else if (dir === -1 && wrap.scrollLeft <= 4) {
+			wrap.scrollTo({ left: maxScroll, behavior: 'smooth' });
+		} else {
+			wrap.scrollBy({ left: dir * cardWidth, behavior: 'smooth' });
+		}
+	};
+
+	prev.addEventListener('click', () => scrollByCard(-1));
+	next.addEventListener('click', () => scrollByCard(1));
+</script>

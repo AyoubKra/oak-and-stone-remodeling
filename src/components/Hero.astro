@@ -1,0 +1,317 @@
+---
+const bottomBar = [
+	{
+		label: 'Real Local Pricing',
+		sub: 'Based on 200+ Raleigh projects',
+		svg: `<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>`,
+	},
+	{
+		label: 'Takes 2 Minutes',
+		sub: '8 quick, simple questions',
+		svg: `<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>`,
+	},
+	{
+		label: 'No Obligations',
+		sub: 'Free forever, no catch',
+		svg: `<path d="M12 3 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/>`,
+	},
+	{
+		label: 'Plan With Confidence',
+		sub: 'Know before you call',
+		svg: `<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+	},
+];
+
+const steps = [
+  { id:1, label:'Project Type',        question:'What are you planning to remodel?',              options:['Kitchen','Bathroom','Home Addition','Whole Home'] },
+  { id:2, label:'Current Stage',       question:'Where are you in the planning process?',         options:['Just Researching','Actively Planning','Getting Quotes Now','Ready to Start'] },
+  { id:3, label:'Project Size',        question:'How would you describe the scope?',              options:['Small — Minor updates, one room','Medium — Full room renovation','Large — Multiple rooms or significant structural work','Custom — I need something unique'] },
+  { id:4, label:'Finish Level',        question:'What level of finishes are you aiming for?',     helper:'Not sure? Standard means clean and functional, quality materials done right. Premium means upgraded fixtures, custom cabinetry, mid-range stone. Luxury means imported tile, custom built-ins, and top-tier appliances.', options:['Standard','Premium','Luxury'] },
+  { id:5, label:'Plumbing & Electrical',question:'Will your project require plumbing or electrical work?', cols1: true, options:["Yes — I need plumbing relocated or new electrical runs","Probably — I'm not sure yet","No — Cosmetic updates only"] },
+  { id:6, label:'Timeline',            question:'When do you want to start?',                     options:['As Soon As Possible','Within 1–3 Months','3–6 Months From Now','Just Exploring for Now'] },
+  { id:7, label:'Neighborhood',        question:'Where is the project located?',                  options:['Raleigh','Cary','Apex','Wake Forest','Garner / Holly Springs','Other Triangle Area'] },
+  { id:8, label:'Comfort Budget',      question:'What investment range feels realistic for your project?', options:['Under $30,000','$30,000–$50,000','$50,000–$80,000','$80,000 and above'] },
+];
+---
+
+<section class="hero" id="estimate" aria-labelledby="hero-headline">
+
+	<!-- LEFT: content -->
+	<div class="hero__content">
+
+		<p class="hero__eyebrow">Raleigh's Remodeling Specialists</p>
+
+		<h1 id="hero-headline" class="hero__headline">
+			Find Out What Your Raleigh Remodel Could Cost — <em>Before</em> You Call Anyone
+		</h1>
+
+		<p class="hero__sub">
+			Answer 8 quick questions and get a realistic project range for your kitchen, bathroom, home addition, or whole-home remodel. No email required to see your estimate.
+		</p>
+
+		<div class="hero__ctas">
+			<a href="#estimate" class="btn btn-primary hero__cta-primary">
+				Get My Free Estimate
+				<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+			</a>
+			<a href="#how-it-works" class="hero__cta-secondary">
+				<span class="hero__cta-play">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l4 4-4 4"/></svg>
+				</span>
+				See How It Works
+			</a>
+		</div>
+
+	</div>
+
+	<!-- RIGHT: image + full estimator widget -->
+	<div class="hero__right">
+		<img
+			src="/hero image.png"
+			alt="Beautifully remodeled kitchen — Oak and Stone Remodeling"
+			class="hero__image"
+			width="900"
+			height="1000"
+			fetchpriority="high"
+		/>
+		<div class="hero__right-overlay" aria-hidden="true"></div>
+		<div class="hero__est-widget" id="hero-estimator">
+
+			<!-- Header -->
+			<div class="hero__est-head">
+				<div>
+					<p class="hero__est-eyebrow">Free Tool — 60 Seconds</p>
+					<h2 class="hero__est-headline">What Will Your Project Cost?</h2>
+				</div>
+				<div class="hero__est-proof">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+					Over 340 homeowners used this last month
+				</div>
+			</div>
+
+			<!-- Progress -->
+			<div class="hero__est-progress">
+				<div class="hero__est-progress-top">
+					<span class="hero__est-step-label" id="h-step-label">Step 1 of 8</span>
+					<span class="hero__est-step-name" id="h-step-name">Project Type</span>
+				</div>
+				<div class="hero__est-bar-track">
+					<div class="hero__est-bar-fill" id="h-bar" style="width:12.5%"></div>
+				</div>
+			</div>
+
+			<!-- Steps -->
+			<div class="hero__est-steps" id="h-steps">
+				{steps.map((step, i) => (
+					<div class="hero__est-step" id={`h-step-${step.id}`} data-step={step.id} style={i === 0 ? '' : 'display:none'}>
+						<p class="hero__est-question">{step.question}</p>
+						{step.helper && <p class="hero__est-helper">{step.helper}</p>}
+						<div class={`hero__est-options ${step.cols1 ? 'hero__est-options--1' : ''} ${!step.cols1 && step.options.length === 3 ? 'hero__est-options--3' : ''} ${step.options.length === 6 ? 'hero__est-options--3' : ''}`}>
+							{step.options.map(opt => (
+								<label class="hero__est-opt">
+									<input type="radio" name={`h-step-${step.id}`} value={opt} />
+									<span>{opt}</span>
+									<svg class="hero__est-check" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+								</label>
+							))}
+						</div>
+					</div>
+				))}
+			</div>
+
+			<!-- Contact capture -->
+			<div class="hero__est-contact" id="h-contact" style="display:none">
+				<p class="hero__est-contact-title">Want a detailed breakdown sent to you?</p>
+				<form class="hero__est-form" id="h-form">
+					<input class="hero__est-input" type="text" placeholder="Full Name" required />
+					<input class="hero__est-input" type="email" placeholder="Email Address" required />
+					<input class="hero__est-input" type="tel" placeholder="Phone (optional)" />
+					<button type="submit" class="btn btn-primary hero__est-submit">
+						Send My Detailed Estimate
+						<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+					</button>
+				</form>
+				<p class="hero__est-privacy">No spam. No pressure. Just your estimate and a friendly follow-up.</p>
+				<button class="hero__est-skip" id="h-skip">No thanks, I just wanted to see the range</button>
+			</div>
+
+			<!-- Result -->
+			<div class="hero__est-result" id="h-result" style="display:none">
+				<h3 class="hero__est-result-title">Here's Your Estimated Investment</h3>
+				<div class="hero__est-result-boxes">
+					<div class="hero__est-result-box">
+						<p class="hero__est-result-box-label">Estimated Project Range</p>
+						<p class="hero__est-result-box-value" id="h-range">—</p>
+					</div>
+					<div class="hero__est-result-box">
+						<p class="hero__est-result-box-label">Typical Timeline</p>
+						<p class="hero__est-result-box-value" id="h-timeline">—</p>
+					</div>
+				</div>
+				<p class="hero__est-result-note">This range is based on similar projects completed in the Raleigh area. Final pricing depends on layout, materials, and structural conditions. Our proposals never go above the agreed price.</p>
+				<p class="hero__est-urgency" id="h-urgency" style="display:none">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+					We're currently booking projects starting August 2026 — only 3 slots remaining this month.
+				</p>
+				<p class="hero__est-urgency hero__est-urgency--standard" id="h-urgency-std">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+					Most homeowners book their consultation 4–8 weeks before they want to start.
+				</p>
+			</div>
+
+			<!-- Nav -->
+			<div class="hero__est-nav" id="h-nav">
+				<button class="hero__est-back" id="h-back" style="visibility:hidden">
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+					Back
+				</button>
+				<button class="hero__est-next" id="h-next" disabled>
+					Next
+					<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+				</button>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+
+<!-- Bottom trust bar -->
+<div class="hero__bar">
+	<div class="container-site hero__bar-inner">
+		{bottomBar.map(b => (
+			<div class="hero__bar-item">
+				<span class="hero__bar-icon">
+					<svg aria-hidden="true" viewBox="0 0 24 24" set:html={b.svg}/>
+				</span>
+				<div>
+					<p class="hero__bar-label">{b.label}</p>
+					<p class="hero__bar-sub">{b.sub}</p>
+				</div>
+			</div>
+		))}
+	</div>
+</div>
+
+<script>
+(function () {
+  var TOTAL = 8;
+  var current = 1;
+  var answers = {};
+  var stepNames = ['Project Type','Current Stage','Project Size','Finish Level','Plumbing & Electrical','Timeline','Neighborhood','Comfort Budget'];
+
+  function $(id) { return document.getElementById(id); }
+  function stepEl(n) { return $('h-step-' + n); }
+
+  var barFill    = $('h-bar');
+  var stepLabel  = $('h-step-label');
+  var stepName   = $('h-step-name');
+  var backBtn    = $('h-back');
+  var nextBtn    = $('h-next');
+  var stepsWrap  = $('h-steps');
+  var resultEl   = $('h-result');
+  var contactEl  = $('h-contact');
+  var navEl      = $('h-nav');
+
+  function updateProgress() {
+    barFill.style.width = ((current / TOTAL) * 100) + '%';
+    stepLabel.textContent = 'Step ' + current + ' of ' + TOTAL;
+    stepName.textContent  = stepNames[current - 1];
+    backBtn.style.visibility = current > 1 ? 'visible' : 'hidden';
+  }
+
+  function getSelected(step) {
+    var checked = document.querySelector('input[name="h-step-' + step + '"]:checked');
+    return checked ? checked.value : null;
+  }
+
+  function updateNext() {
+    nextBtn.disabled = !getSelected(current);
+  }
+
+  document.querySelectorAll('.hero__est-opt input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var name = this.name;
+      document.querySelectorAll('input[name="' + name + '"]').forEach(function(r) {
+        r.closest('.hero__est-opt').classList.remove('is-selected');
+      });
+      this.closest('.hero__est-opt').classList.add('is-selected');
+      answers[current] = this.value;
+      updateNext();
+    });
+  });
+
+  backBtn.addEventListener('click', function() {
+    if (current <= 1) return;
+    stepEl(current).style.display = 'none';
+    current--;
+    stepEl(current).style.display = '';
+    updateProgress();
+    updateNext();
+  });
+
+  nextBtn.addEventListener('click', function() {
+    var val = getSelected(current);
+    if (!val) return;
+    answers[current] = val;
+    if (current < TOTAL) {
+      stepEl(current).style.display = 'none';
+      current++;
+      stepEl(current).style.display = '';
+      updateProgress();
+      updateNext();
+    } else {
+      showResult();
+    }
+  });
+
+  function fmt(n) { return '$' + n.toLocaleString('en-US'); }
+
+  function calcEstimate() {
+    var type = answers[1] || 'Kitchen';
+    var size = (answers[3] || 'Medium').split(' ')[0];
+    var finish = answers[4] || 'Standard';
+    var plumbing = answers[5] || 'No';
+    var bases = { 'Kitchen':{low:28000,high:75000},'Bathroom':{low:14000,high:52000},'Home Addition':{low:85000,high:240000},'Whole Home':{low:140000,high:380000} };
+    var sm = {'Small':0.55,'Medium':1.0,'Large':1.5,'Custom':1.85}[size] || 1;
+    var fm = {'Standard':1.0,'Premium':1.38,'Luxury':1.9}[finish] || 1;
+    var pa = plumbing.startsWith('Yes') ? 0.15 : plumbing.startsWith('Prob') ? 0.08 : 0;
+    var b = bases[type] || bases['Kitchen'];
+    return { low: Math.round(b.low*sm*fm*(1+pa)/1000)*1000, high: Math.round(b.high*sm*fm*(1+pa)/1000)*1000 };
+  }
+
+  function calcTimeline() {
+    var type = answers[1] || 'Kitchen';
+    var size = (answers[3] || 'Medium').split(' ')[0];
+    var t = { 'Kitchen':{'Small':'4–6 wks','Medium':'7–10 wks','Large':'10–14 wks','Custom':'12–16 wks'},'Bathroom':{'Small':'3–5 wks','Medium':'5–8 wks','Large':'8–12 wks','Custom':'10–14 wks'},'Home Addition':{'Small':'8–12 wks','Medium':'12–18 wks','Large':'18–24 wks','Custom':'20–28 wks'},'Whole Home':{'Small':'12–18 wks','Medium':'18–26 wks','Large':'24–36 wks','Custom':'30–42 wks'} };
+    return (t[type] && t[type][size]) || '8–14 wks';
+  }
+
+  function showResult() {
+    stepsWrap.style.display = 'none';
+    navEl.style.display     = 'none';
+    barFill.style.width     = '100%';
+    stepLabel.textContent   = 'Your Estimate';
+    stepName.textContent    = '';
+    var est = calcEstimate();
+    $('h-range').textContent    = fmt(est.low) + ' – ' + fmt(est.high);
+    $('h-timeline').textContent = calcTimeline();
+    var stage = answers[2] || '';
+    if (stage === 'Getting Quotes Now' || stage === 'Ready to Start') {
+      $('h-urgency').style.display     = 'flex';
+      $('h-urgency-std').style.display = 'none';
+    }
+    contactEl.style.display = '';
+    setTimeout(function() { resultEl.style.display = ''; }, 500);
+  }
+
+  $('h-skip').addEventListener('click', function() { contactEl.style.display = 'none'; });
+
+  $('h-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    contactEl.innerHTML = '<p class="hero__est-thanks">✓ Sent! We\'ll follow up with your detailed breakdown shortly.</p>';
+  });
+
+  updateProgress();
+})();
+</script>

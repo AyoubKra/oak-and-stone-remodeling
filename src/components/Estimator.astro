@@ -1,0 +1,329 @@
+---
+const steps = [
+  {
+    id: 1,
+    label: 'Project Type',
+    question: 'What are you planning to remodel?',
+    options: ['Kitchen', 'Bathroom', 'Home Addition', 'Whole Home'],
+  },
+  {
+    id: 2,
+    label: 'Current Stage',
+    question: 'Where are you in the planning process?',
+    options: ['Just Researching', 'Actively Planning', 'Getting Quotes Now', 'Ready to Start Immediately'],
+  },
+  {
+    id: 3,
+    label: 'Project Size',
+    question: 'How would you describe the scope?',
+    options: [
+      'Small — Minor updates, one room',
+      'Medium — Full room renovation',
+      'Large — Multiple rooms or significant structural work',
+      'Custom — I need something unique',
+    ],
+  },
+  {
+    id: 4,
+    label: 'Finish Level',
+    question: 'What level of finishes are you aiming for?',
+    helper: 'Not sure? Standard means clean and functional, quality materials done right. Premium means upgraded fixtures, custom cabinetry, mid-range stone. Luxury means imported tile, custom built-ins, and top-tier appliances.',
+    options: ['Standard', 'Premium', 'Luxury'],
+  },
+  {
+    id: 5,
+    label: 'Plumbing & Electrical',
+    question: 'Will your project require plumbing or electrical work?',
+    options: [
+      'Yes — I need plumbing relocated or new electrical runs',
+      'Probably — I\'m not sure yet',
+      'No — Cosmetic updates only',
+    ],
+  },
+  {
+    id: 6,
+    label: 'Timeline',
+    question: 'When do you want to start?',
+    options: ['As Soon As Possible', 'Within 1–3 Months', '3–6 Months From Now', 'Just Exploring for Now'],
+  },
+  {
+    id: 7,
+    label: 'Neighborhood',
+    question: 'Where is the project located?',
+    options: ['Raleigh', 'Cary', 'Apex', 'Wake Forest', 'Garner / Holly Springs', 'Other Triangle Area'],
+  },
+  {
+    id: 8,
+    label: 'Comfort Budget',
+    question: 'What investment range feels realistic for your project?',
+    options: ['Under $30,000', '$30,000–$50,000', '$50,000–$80,000', '$80,000 and above'],
+  },
+];
+---
+
+<section class="estimator" id="estimate" aria-labelledby="estimator-headline">
+  <div class="container-site estimator__inner">
+
+    <!-- Left: section header -->
+    <div class="estimator__header">
+      <p class="estimator__eyebrow">Free Tool — 60 Seconds</p>
+      <h2 id="estimator-headline" class="estimator__headline">What Will Your Project Cost?</h2>
+      <p class="estimator__sub">Answer a few questions. Get a realistic estimate range — no email required.</p>
+      <div class="estimator__proof">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Over 340 Raleigh homeowners used this estimator last month
+      </div>
+    </div>
+
+    <!-- Right: widget -->
+    <div class="estimator__widget" id="estimator-widget">
+
+      <!-- Progress -->
+      <div class="estimator__progress">
+        <div class="estimator__progress-top">
+          <span class="estimator__step-label" id="est-step-label">Step 1 of 8</span>
+          <span class="estimator__step-name" id="est-step-name">Project Type</span>
+        </div>
+        <div class="estimator__bar-track">
+          <div class="estimator__bar-fill" id="est-bar" style="width: 12.5%"></div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="estimator__steps" id="est-steps">
+        {steps.map((step, i) => (
+          <div class="estimator__step" id={`est-step-${step.id}`} data-step={step.id} style={i === 0 ? '' : 'display:none'}>
+            <p class="estimator__question">{step.question}</p>
+            {step.helper && <p class="estimator__helper">{step.helper}</p>}
+            <div class={`estimator__options ${step.options.length <= 3 ? 'estimator__options--cols-3' : ''}`}>
+              {step.options.map((opt, j) => (
+                <label class="estimator__opt">
+                  <input type="radio" name={`step-${step.id}`} value={opt} />
+                  <span class="estimator__opt-text">{opt}</span>
+                  <svg class="estimator__opt-check" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Result screen -->
+      <div class="estimator__result" id="est-result" style="display:none">
+        <h3 class="estimator__result-headline">Here's Your Estimated Investment</h3>
+        <div class="estimator__result-range">
+          <p class="estimator__result-range-label">Estimated Project Range</p>
+          <p class="estimator__result-value" id="est-range-value">—</p>
+        </div>
+        <div class="estimator__result-timeline">
+          <p class="estimator__result-timeline-label">Typical Timeline</p>
+          <p class="estimator__result-timeline-value" id="est-timeline-value">—</p>
+        </div>
+        <p class="estimator__result-note">
+          This range is based on similar projects we've completed in the Raleigh area. Final pricing depends on your specific layout, material selections, and structural conditions. Our detailed proposals never go above the agreed price.
+        </p>
+        <p class="estimator__urgency" id="est-urgency" style="display:none">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          We're currently booking projects starting August 2026 — only 3 consultation slots remaining this month.
+        </p>
+        <p class="estimator__urgency-standard" id="est-urgency-standard">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Most homeowners book their consultation 4–8 weeks before they want construction to begin.
+        </p>
+      </div>
+
+      <!-- Contact capture -->
+      <div class="estimator__contact" id="est-contact" style="display:none">
+        <h3 class="estimator__contact-headline">Want a Detailed Breakdown Sent to You?</h3>
+        <p class="estimator__contact-sub">Enter your info and we'll send a full line-item estimate breakdown for your project type — including what most contractors don't tell you upfront.</p>
+        <form class="estimator__form" id="est-form">
+          <input class="estimator__input" type="text" placeholder="Full Name" aria-label="Full Name" required />
+          <input class="estimator__input" type="email" placeholder="Email Address" aria-label="Email Address" required />
+          <input class="estimator__input" type="tel" placeholder="Phone Number (optional)" aria-label="Phone Number" />
+          <button type="submit" class="btn btn-primary estimator__submit">
+            Send My Detailed Estimate
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+        <p class="estimator__privacy">No spam. No pressure. Just your estimate breakdown and a friendly follow-up from our team.</p>
+        <button class="estimator__skip" id="est-skip">No thanks, I just wanted to see the range</button>
+      </div>
+
+      <!-- Navigation -->
+      <div class="estimator__nav" id="est-nav">
+        <button class="estimator__back" id="est-back" style="visibility:hidden">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          Back
+        </button>
+        <button class="estimator__next" id="est-next" disabled>
+          Next
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  const TOTAL = 8;
+  let current = 1;
+  const answers = {};
+
+  const $ = (id) => document.getElementById(id);
+  const stepEl = (n) => $('est-step-' + n);
+
+  const barFill = $('est-bar');
+  const stepLabel = $('est-step-label');
+  const stepName = $('est-step-name');
+  const backBtn = $('est-back');
+  const nextBtn = $('est-next');
+  const stepsWrap = $('est-steps');
+  const resultEl = $('est-result');
+  const contactEl = $('est-contact');
+  const navEl = $('est-nav');
+
+  const stepNames = ['Project Type','Current Stage','Project Size','Finish Level','Plumbing & Electrical','Timeline','Neighborhood','Comfort Budget'];
+
+  function updateProgress() {
+    const pct = (current / TOTAL) * 100;
+    barFill.style.width = pct + '%';
+    stepLabel.textContent = 'Step ' + current + ' of ' + TOTAL;
+    stepName.textContent = stepNames[current - 1];
+    backBtn.style.visibility = current > 1 ? 'visible' : 'hidden';
+  }
+
+  function getSelected(step) {
+    const checked = document.querySelector('input[name="step-' + step + '"]:checked');
+    return checked ? checked.value : null;
+  }
+
+  function updateNext() {
+    nextBtn.disabled = !getSelected(current);
+  }
+
+  // Listen for option selection
+  document.querySelectorAll('.estimator__opt input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var stepId = parseInt(this.name.replace('step-', ''));
+      answers[stepId] = this.value;
+      // Style selected label
+      document.querySelectorAll('input[name="' + this.name + '"]').forEach(function(r) {
+        r.closest('.estimator__opt').classList.remove('is-selected');
+      });
+      this.closest('.estimator__opt').classList.add('is-selected');
+      updateNext();
+    });
+  });
+
+  // Back
+  backBtn.addEventListener('click', function() {
+    if (current <= 1) return;
+    stepEl(current).style.display = 'none';
+    current--;
+    stepEl(current).style.display = '';
+    updateProgress();
+    updateNext();
+  });
+
+  // Next / Calculate
+  nextBtn.addEventListener('click', function() {
+    var val = getSelected(current);
+    if (!val) return;
+    answers[current] = val;
+
+    if (current < TOTAL) {
+      stepEl(current).style.display = 'none';
+      current++;
+      stepEl(current).style.display = '';
+      updateProgress();
+      updateNext();
+    } else {
+      // Show result
+      showResult();
+    }
+  });
+
+  function calcEstimate() {
+    var type = answers[1] || 'Kitchen';
+    var size = answers[3] || 'Medium';
+    var finish = answers[4] || 'Standard';
+    var plumbing = answers[5] || 'No';
+
+    var bases = {
+      'Kitchen':       { low: 28000, high: 75000 },
+      'Bathroom':      { low: 14000, high: 52000 },
+      'Home Addition': { low: 85000, high: 240000 },
+      'Whole Home':    { low: 140000, high: 380000 },
+    };
+    var scopeMult = { 'Small': 0.55, 'Medium': 1.0, 'Large': 1.5, 'Custom': 1.85 };
+    var finishMult = { 'Standard': 1.0, 'Premium': 1.38, 'Luxury': 1.9 };
+    var plumbAdd = { 'Yes': 0.15, 'Probably': 0.08, 'No': 0.0 };
+
+    var base = bases[type] || bases['Kitchen'];
+    // scope key: take first word
+    var sizeKey = size.split(' ')[0];
+    var sm = scopeMult[sizeKey] || 1.0;
+    var fm = finishMult[finish] || 1.0;
+    var pa = 0;
+    if (plumbing.startsWith('Yes')) pa = plumbAdd['Yes'];
+    else if (plumbing.startsWith('Probably')) pa = plumbAdd['Probably'];
+
+    var low  = Math.round((base.low  * sm * fm * (1 + pa)) / 1000) * 1000;
+    var high = Math.round((base.high * sm * fm * (1 + pa)) / 1000) * 1000;
+    return { low, high };
+  }
+
+  function calcTimeline() {
+    var type = answers[1] || 'Kitchen';
+    var size = answers[3] || 'Medium';
+    var sizeKey = size.split(' ')[0];
+    var timelines = {
+      'Kitchen':       { 'Small': '4–6 weeks', 'Medium': '7–10 weeks', 'Large': '10–14 weeks', 'Custom': '12–16 weeks' },
+      'Bathroom':      { 'Small': '3–5 weeks', 'Medium': '5–8 weeks',  'Large': '8–12 weeks',  'Custom': '10–14 weeks' },
+      'Home Addition': { 'Small': '8–12 weeks','Medium': '12–18 weeks','Large': '18–24 weeks', 'Custom': '20–28 weeks' },
+      'Whole Home':    { 'Small': '12–18 weeks','Medium': '18–26 weeks','Large': '24–36 weeks','Custom': '30–42 weeks' },
+    };
+    return (timelines[type] && timelines[type][sizeKey]) || '8–14 weeks';
+  }
+
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US');
+  }
+
+  function showResult() {
+    stepsWrap.style.display = 'none';
+    navEl.style.display = 'none';
+    barFill.style.width = '100%';
+    stepLabel.textContent = 'Your Estimate';
+    stepName.textContent = '';
+
+    var est = calcEstimate();
+    $('est-range-value').textContent = fmt(est.low) + ' – ' + fmt(est.high);
+    $('est-timeline-value').textContent = calcTimeline();
+
+    var stage = answers[2] || '';
+    if (stage === 'Getting Quotes Now' || stage === 'Ready to Start Immediately') {
+      $('est-urgency').style.display = 'flex';
+      $('est-urgency-standard').style.display = 'none';
+    }
+
+    resultEl.style.display = '';
+    setTimeout(function() { contactEl.style.display = ''; }, 600);
+  }
+
+  // Skip link
+  $('est-skip').addEventListener('click', function() {
+    contactEl.style.display = 'none';
+  });
+
+  // Form submit (demo)
+  $('est-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    contactEl.innerHTML = '<p class="estimator__thanks">✓ Sent! We\'ll follow up with your detailed breakdown shortly.</p>';
+  });
+
+  updateProgress();
+})();
+</script>
